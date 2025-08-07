@@ -41,7 +41,7 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 100,
         justifyContent: 'center',
         marginHorizontal: 10,
-
+        marginLeft: 5
     },
 
     buttonText: {

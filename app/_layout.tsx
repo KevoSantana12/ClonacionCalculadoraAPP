@@ -4,10 +4,8 @@ import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 
+
 const RootLayout = () => {
-
-
-
 
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf')
@@ -19,12 +17,15 @@ const RootLayout = () => {
 
   return (
     <View style={globalStyles.background}>
+
+      <StatusBar hidden={true} />
+
       <Text>Header</Text>
 
       <Slot />
 
-      <StatusBar style='light' />
       <Text>Footer</Text>
+
     </View>
   )
 }
