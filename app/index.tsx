@@ -1,20 +1,32 @@
 import CalculatorButton from "@/components/CalculatorButton";
 import ThemeText from "@/components/ThemeText";
 import { Colors } from "@/constants/Colors";
+import { useCalculator } from "@/hooks/useCalculator";
 
 import { globalStyles } from "@/styles/global-styles";
 import { View } from "react-native";
 
 
 const index = () => {
+
+    const {
+        formula,
+        buildNumber,
+        clean,
+        toggleSign
+
+    } = useCalculator();
+
     return (
 
         // // Resultados
 
         <View style={globalStyles.calculatorContainer}>
             <View style={{ paddingHorizontal: 30, paddingBottom: 20 }}>
-                <ThemeText variant='h1'>50 x 50</ThemeText>
+
+                <ThemeText variant='h1'>{formula}</ThemeText>
                 <ThemeText variant='h2'>250</ThemeText>
+
             </View>
 
             {/* // Botones
@@ -27,7 +39,7 @@ const index = () => {
                     isTextBlack
                     onPress={
                         () => {
-                            console.log("C")
+                            clean()
                         }}
                     color={Colors.lightGray}>
 
@@ -37,7 +49,7 @@ const index = () => {
                     label="+/-"
                     isTextBlack
                     onPress={() => {
-                        console.log("+/-")
+                        toggleSign()
                     }}
 
                     color={Colors.lightGray}>
@@ -72,7 +84,7 @@ const index = () => {
                     label="7"
                     onPress={
                         () => {
-                            console.log("7")
+                            buildNumber("7")
                         }}
                 >
 
@@ -81,7 +93,7 @@ const index = () => {
                 <CalculatorButton
                     label="8"
                     onPress={() => {
-                        console.log("8")
+                        buildNumber("8")
                     }}>
 
                 </CalculatorButton>
@@ -89,7 +101,7 @@ const index = () => {
                 <CalculatorButton
                     label="9"
                     onPress={() => {
-                        console.log("9")
+                        buildNumber("9")
                     }}
                 >
 
@@ -111,7 +123,7 @@ const index = () => {
 
                     onPress={
                         () => {
-                            console.log("4")
+                            buildNumber("4")
                         }}>
 
                 </CalculatorButton>
@@ -119,7 +131,7 @@ const index = () => {
                 <CalculatorButton
                     label="5"
                     onPress={() => {
-                        console.log("5")
+                        buildNumber("5")
                     }}>
 
                 </CalculatorButton>
@@ -127,7 +139,7 @@ const index = () => {
                 <CalculatorButton
                     label="6"
                     onPress={() => {
-                        console.log("6")
+                        buildNumber("6")
                     }}>
 
                 </CalculatorButton>
@@ -150,7 +162,7 @@ const index = () => {
 
                     onPress={
                         () => {
-                            console.log("1")
+                            buildNumber("1")
                         }}
                 >
 
@@ -159,7 +171,7 @@ const index = () => {
                 <CalculatorButton
                     label="2"
                     onPress={() => {
-                        console.log("2")
+                        buildNumber("2")
                     }}>
 
                 </CalculatorButton>
@@ -167,7 +179,7 @@ const index = () => {
                 <CalculatorButton
                     label="3"
                     onPress={() => {
-                        console.log("3")
+                        buildNumber("3")
                     }}
                 >
 
@@ -192,7 +204,7 @@ const index = () => {
 
                     onPress={
                         () => {
-                            console.log("0")
+                            buildNumber("0")
                         }}
 
                     doubleSized
@@ -203,7 +215,7 @@ const index = () => {
                 <CalculatorButton
                     label="."
                     onPress={() => {
-                        console.log(".")
+                        buildNumber(".")
                     }}>
 
                 </CalculatorButton>
