@@ -19,10 +19,19 @@ export const useCalculator = () => {
     const lastOperation = useRef<Operator | undefined>(undefined);
 
     useEffect(() => {
-
-        setFormula(number);
-
+        if (lastOperation.current) {
+            const firstFormulaPart = formula.split(' ').at(0);
+            setFormula(`${firstFormulaPart} ${lastOperation.current} ${number}`);
+        } else {
+            setFormula(number);
+        }
     }, [number]);
+
+    useEffect(() => {
+        const subResult = calculateSubResult();
+        setPrevNumber(`${subResult}`);
+    }, [formula]);
+
 
     const buildNumber = (numberString: string) => {
 
@@ -68,6 +77,81 @@ export const useCalculator = () => {
         }
     }
 
+    const deleteLastEntry = () => {
+
+        if (number.length <= 1 || number.includes('-') && number.length === 2) {
+            setNumber("0");
+        } else {
+            setNumber(number.slice(0, -1));
+        }
+
+    }
+
+    const setLastNumber = () => {
+
+        if (number.endsWith('.')) {
+            setNumber(number.slice(0, -1));
+        }
+
+        setPrevNumber(number);
+        setNumber("0");
+    }
+
+    const divideOperation = () => {
+        setLastNumber();
+        lastOperation.current = Operator.Divide;
+    }
+
+    const multiplyOperation = () => {
+        setLastNumber();
+        lastOperation.current = Operator.Multiply;
+    }
+
+    const addOperation = () => {
+        setLastNumber();
+        lastOperation.current = Operator.Add;
+    }
+
+    const subtractOperation = () => {
+        setLastNumber();
+        lastOperation.current = Operator.Subtract;
+    }
+
+
+    const calculateResult = () => {
+        const result = calculateSubResult();
+        setFormula(`${result}`);
+
+        lastOperation.current = undefined;
+        setPrevNumber('0');
+    };
+
+    const calculateSubResult = () => {
+        const [firstValue, operation, secondValue] = formula.split(' ');
+
+        const num1 = Number(firstValue);
+        const num2 = Number(secondValue); // NaN
+
+        if (isNaN(num2)) return num1;
+
+        switch (operation) {
+            case Operator.Add:
+                return num1 + num2;
+
+            case Operator.Subtract:
+                return num1 - num2;
+
+            case Operator.Multiply:
+                return num1 * num2;
+
+            case Operator.Divide:
+                return num1 / num2;
+
+            default:
+                throw new Error(`Operation ${operation} not implemented`);
+        }
+    };
+
 
     return {
         formula,
@@ -76,6 +160,13 @@ export const useCalculator = () => {
 
         clean,
         buildNumber,
-        toggleSign
+        toggleSign,
+        deleteLastEntry,
+        divideOperation,
+        addOperation,
+        multiplyOperation,
+        subtractOperation,
+        calculateSubResult,
+        calculateResult,
     };
 }

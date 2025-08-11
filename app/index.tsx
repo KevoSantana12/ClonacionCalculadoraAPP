@@ -13,7 +13,15 @@ const index = () => {
         formula,
         buildNumber,
         clean,
-        toggleSign
+        toggleSign,
+        prevNumber,
+        deleteLastEntry,
+        divideOperation,
+        addOperation,
+        subtractOperation,
+        multiplyOperation,
+        calculateSubResult,
+        calculateResult,
 
     } = useCalculator();
 
@@ -25,7 +33,10 @@ const index = () => {
             <View style={{ paddingHorizontal: 30, paddingBottom: 20 }}>
 
                 <ThemeText variant='h1'>{formula}</ThemeText>
-                <ThemeText variant='h2'>250</ThemeText>
+
+                {formula === prevNumber ? null : (
+                    <ThemeText variant="h2">{prevNumber}</ThemeText>
+                )}
 
             </View>
 
@@ -60,7 +71,7 @@ const index = () => {
                     label="del"
                     isTextBlack
                     onPress={() => {
-                        console.log("del")
+                        deleteLastEntry()
                     }}
                     color={Colors.lightGray}>
 
@@ -69,7 +80,7 @@ const index = () => {
                 <CalculatorButton
                     label="÷"
                     onPress={() => {
-                        console.log("÷")
+                        divideOperation()
                     }}
                     color={Colors.orange}
                 ></CalculatorButton>
@@ -110,7 +121,7 @@ const index = () => {
                 <CalculatorButton
                     label="x"
                     onPress={() => {
-                        console.log("x")
+                        multiplyOperation()
                     }}
                     color={Colors.orange}
                 ></CalculatorButton>
@@ -147,7 +158,7 @@ const index = () => {
                 <CalculatorButton
                     label="-"
                     onPress={() => {
-                        console.log("-")
+                        subtractOperation()
                     }}
                     color={Colors.orange}
                 ></CalculatorButton>
@@ -188,7 +199,7 @@ const index = () => {
                 <CalculatorButton
                     label="+"
                     onPress={() => {
-                        console.log("+")
+                        addOperation()
                     }}
                     color={Colors.orange}
                 ></CalculatorButton>
@@ -223,7 +234,7 @@ const index = () => {
                 <CalculatorButton
                     label="="
                     onPress={() => {
-                        console.log("=")
+                        calculateResult()
                     }}
                     color={Colors.orange}
                 ></CalculatorButton>
